@@ -9,32 +9,33 @@
   <body>
     <div id='calc-case'>
       <div id='screen'>
-        <p>0123456789</p>
+        <p id='input'>0</p>
+        <p id='result'></p>
       </div>
       <div id='buttons'>
         <div id='buttons-top'>
-          <button type="button" class='top-buttons'>C</button>
+          <button type="button" class='top-buttons' id='clear-button'>C</button>
         </div>
         <div id='buttons-bottom'>
           <div id='buttons-nums'>
-            <button type="button" class='num-buttons'>9</button>
-            <button type="button" class='num-buttons'>8</button>
-            <button type="button" class='num-buttons'>7</button>
-            <button type="button" class='num-buttons'>6</button>
-            <button type="button" class='num-buttons'>5</button>
-            <button type="button" class='num-buttons'>4</button>
-            <button type="button" class='num-buttons'>3</button>
-            <button type="button" class='num-buttons'>2</button>
-            <button type="button" class='num-buttons'>1</button>
-            <button type="button" class='num-buttons'>0</button>
-            <button type="button" class='num-buttons'>.</button>
-            <button type="button" class='num-buttons'>=</button>
+            <button type="button" class='num-buttons input' id='9'>9</button>
+            <button type="button" class='num-buttons input' id='8'>8</button>
+            <button type="button" class='num-buttons input' id='7'>7</button>
+            <button type="button" class='num-buttons input' id='6'>6</button>
+            <button type="button" class='num-buttons input' id='5'>5</button>
+            <button type="button" class='num-buttons input' id='4'>4</button>
+            <button type="button" class='num-buttons input' id='3'>3</button>
+            <button type="button" class='num-buttons input' id='2'>2</button>
+            <button type="button" class='num-buttons input' id='1'>1</button>
+            <button type="button" class='num-buttons input' id='0'>0</button>
+            <button type="button" class='num-buttons input' id='.'>.</button>
+            <button type="button" id='equals-button'>=</button>
           </div>
           <div id='buttons-right'>
-            <button type='button' class='right-buttons'>+</button>
-            <button type='button' class='right-buttons'>-</button>
-            <button type='button' class='right-buttons'>*</button>
-            <button type='button' class='right-buttons'>/</button>
+            <button type='button' class='right-buttons op' id='+'>+</button>
+            <button type='button' class='right-buttons op' id='-'>-</button>
+            <button type='button' class='right-buttons op' id='*'>*</button>
+            <button type='button' class='right-buttons op' id='/'>/</button>
           </div>
         </div>
       </div>

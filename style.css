@@ -12,6 +12,7 @@
 
 #screen {
   border: 1px solid blue;
+  height: 80px;
   text-align: end;
 }
 
@@ -49,8 +50,8 @@
   height: 50px;
 }
 
-.num-buttons {
-
+.num-buttons,
+#equals-button {
   width: 100px;
   height: 100px;
   margin: 0.5em;
