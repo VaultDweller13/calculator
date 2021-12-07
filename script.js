@@ -6,17 +6,13 @@ const operatorButtons = document.querySelectorAll('.op');
 const equalsButton = document.getElementById('equals-button');
 let displayValue = '';
 let firstOperand = '';
-let secondOperand = '';
-let operator = '';
 let currentOperand = '';
+let operator = '';
 let computed = false;
-
-clearButton.addEventListener('click', clearDisplay);
 
 inputButtons.forEach(btn => btn.addEventListener('click', () => {
   if (computed) {
     clearDisplay();
-    computed = false;
   }
 
   let num = btn.getAttribute('id');
@@ -29,36 +25,36 @@ operatorButtons.forEach(btn => btn.addEventListener('click', () => {
   if (!firstOperand) {
     firstOperand = currentOperand;
   } else {
-    secondOperand = currentOperand; 
-    displayValue = operate(+firstOperand, +secondOperand, operator);
-    firstOperand = displayValue;
-    resultScreen.textContent = displayValue;
-    secondOperand = '';
+    operate(+firstOperand, +currentOperand, operator);
+    computed = false;
   }
   operator = btn.getAttribute('id');
-  currentOperand = ''
-
+  currentOperand = '';
   displayValue += operator;
   inputScreen.textContent = displayValue;
 }))
 
 equalsButton.addEventListener('click', () => {
-  if (!computed) {
-    secondOperand = currentOperand;
-    resultScreen.textContent = operate(+firstOperand, +secondOperand, operator);
-    currentOperand = firstOperand = secondOperand = operator = '';
-    computed = true;
+  if (!computed && currentOperand) {
+    operate(+firstOperand, +currentOperand, operator);
   }
 })
 
+clearButton.addEventListener('click', clearDisplay);
+
 function clearDisplay(){
   displayValue = '';
+  currentOperand = '';
+  firstOperand = '';
+  operator = '';
   inputScreen.textContent = '0';
-  resultScreen.textContent = ''
+  resultScreen.textContent = '';
+  computed = false;
 }
 
 function operate(a, b, operator) {
-  let result = '';
+  console.log(`operation: ${a} ${operator} ${b}`);
+  let result = null;
   switch (operator) {
     case '+': 
       result = add(a, b);
@@ -74,9 +70,12 @@ function operate(a, b, operator) {
       break;
   }
 
-  // currentOperand = firstOperand = secondOperand = operator = '';
-  // computed = true;
-  return result;
+  resultScreen.textContent = result;
+  // inputScreen.textContent = result;
+  firstOperand = result;
+  // currentOperand = operator = '';
+  operator = '';
+  computed = true;
 }
 
 function add(a, b) {
