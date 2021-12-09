@@ -12,37 +12,48 @@ let computed = false;
 
 inputButtons.forEach(btn => btn.addEventListener('click', () => {
   if (computed) {
-    clearDisplay();
+    reset();
+    computed = false;
   }
 
   let num = btn.getAttribute('id');
-  displayValue += num;
   currentOperand += num;
+  displayValue += num;
   inputScreen.textContent = displayValue;
 }))
 
 operatorButtons.forEach(btn => btn.addEventListener('click', () => {
+  computed = false;
+
   if (!firstOperand) {
     firstOperand = currentOperand;
-  } else {
-    operate(+firstOperand, +currentOperand, operator);
-    computed = false;
+  } else if (currentOperand) {
+    let result = operate(+firstOperand, +currentOperand, operator);
+    firstOperand = result;
+    operator = '';
+    displayValue = result;
+    resultScreen.textContent = displayValue;
   }
-  operator = btn.getAttribute('id');
-  currentOperand = '';
-  displayValue += operator;
-  inputScreen.textContent = displayValue;
+
+  if (!operator) {
+    operator = btn.getAttribute('id');
+    displayValue += operator;
+    inputScreen.textContent = displayValue;
+    currentOperand = '';
+  }
 }))
 
 equalsButton.addEventListener('click', () => {
-  if (!computed && currentOperand) {
-    operate(+firstOperand, +currentOperand, operator);
+  if (currentOperand){
+    let result = operate(+firstOperand, +currentOperand, operator);
+    resultScreen.textContent = result;
+    computed = true;
   }
 })
 
-clearButton.addEventListener('click', clearDisplay);
+clearButton.addEventListener('click', reset);
 
-function clearDisplay(){
+function reset(){
   displayValue = '';
   currentOperand = '';
   firstOperand = '';
@@ -53,8 +64,8 @@ function clearDisplay(){
 }
 
 function operate(a, b, operator) {
-  console.log(`operation: ${a} ${operator} ${b}`);
   let result = null;
+
   switch (operator) {
     case '+': 
       result = add(a, b);
@@ -70,12 +81,7 @@ function operate(a, b, operator) {
       break;
   }
 
-  resultScreen.textContent = result;
-  // inputScreen.textContent = result;
-  firstOperand = result;
-  // currentOperand = operator = '';
-  operator = '';
-  computed = true;
+  return result;
 }
 
 function add(a, b) {
@@ -91,6 +97,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
+  if (b == 0) return "Zero division error";
   return a / b;
 }
 
